@@ -1,6 +1,6 @@
 {
-  "name": "antumi-plugin-zentao",
-  "version": "0.2.0",
+  "name": "codot-plugin-zentao",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "check": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
-    "@antumi/plugin-sdk": "file:../../vendor/antumi-plugin-sdk-0.1.3.tgz",
+    "@codot/plugin-sdk": "file:../../vendor/codot-plugin-sdk-0.1.4.tgz",
     "turndown": "7.2.0",
     "zod": "4.6.5"
   },

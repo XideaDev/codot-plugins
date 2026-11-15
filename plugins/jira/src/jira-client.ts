@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { commentState, commentPage, SourceComment, type SourceCommentState, type SourceCommentOptions, type SourceCommentPage } from '@antumi/plugin-sdk'
+import { commentState, commentPage, SourceComment, type SourceCommentState, type SourceCommentOptions, type SourceCommentPage } from '@codot/plugin-sdk'
 import { adfToMarkdown, escapeLinkText } from './jira-adf.js'
 import { isImageAttachment } from './jira-snapshot.js'
-import { ISSUE_STATUS_CATEGORIES, MAX_TASK_IMAGES, type SourceIssue } from '@antumi/plugin-sdk'
-import { SourceError } from '@antumi/plugin-sdk'
+import { ISSUE_STATUS_CATEGORIES, MAX_TASK_IMAGES, type SourceIssue } from '@codot/plugin-sdk'
+import { SourceError } from '@codot/plugin-sdk'
 
 export type JiraCredentials = { site: string; email: string; token: string }
 
@@ -264,7 +264,7 @@ export class JiraClient implements JiraApi {
   }
 
   // An image pasted into a comment is an attachment of the issue, found by its file name as in the
-  // description; the comment lists it by attachment id for Antumi to fetch when it is sent on.
+  // description; the comment lists it by attachment id for Codot to fetch when it is sent on.
   private structuredComment(comment: z.infer<typeof CommentPage>['comments'][number], key: string, attachments: readonly JiraAttachment[]) {
     const images: { id: string; name: string }[] = []
     const markdown = adfToMarkdown(comment.body, { describeMedia: (name) => {

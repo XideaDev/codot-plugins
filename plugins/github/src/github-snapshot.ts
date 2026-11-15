@@ -1,4 +1,4 @@
-import { MAX_SNAPSHOT_LENGTH } from '@antumi/plugin-sdk'
+import { MAX_SNAPSHOT_LENGTH } from '@codot/plugin-sdk'
 import type { GitHubIssue } from './github-client.js'
 
 const pad = (value: number) => String(value).padStart(2, '0')

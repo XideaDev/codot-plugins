@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { commentState, commentPage, SourceComment, type SourceCommentOptions, type SourceCommentPage } from '@antumi/plugin-sdk'
-import { MAX_ISSUE_TITLE_LENGTH, MAX_SNAPSHOT_LENGTH, SourceError, type SourceIssue, type SourceIssueDetail, type SourceSettings } from '@antumi/plugin-sdk'
+import { commentState, commentPage, SourceComment, type SourceCommentOptions, type SourceCommentPage } from '@codot/plugin-sdk'
+import { MAX_ISSUE_TITLE_LENGTH, MAX_SNAPSHOT_LENGTH, SourceError, type SourceIssue, type SourceIssueDetail, type SourceSettings } from '@codot/plugin-sdk'
 
 const ENDPOINT = 'https://api.linear.app/graphql'
 const Person = z.object({ name: z.string(), email: z.string().optional() })
@@ -25,13 +25,13 @@ const Envelope = z.object({
 })
 
 export const ISSUE_FIELDS = 'identifier title url updatedAt priority priorityLabel state { name type } labels { nodes { name } }'
-export const LIST_QUERY = `query AntumiIssues($filter: IssueFilter, $after: String) {
+export const LIST_QUERY = `query CodotIssues($filter: IssueFilter, $after: String) {
   issues(first: 50, after: $after, orderBy: updatedAt, filter: $filter) {
     nodes { ${ISSUE_FIELDS} }
     pageInfo { hasNextPage endCursor }
   }
 }`
-export const DETAIL_QUERY = `query AntumiIssue($id: String!) {
+export const DETAIL_QUERY = `query CodotIssue($id: String!) {
   issue(id: $id) {
     ${ISSUE_FIELDS}
     description creator { name } assignee { name }
@@ -66,7 +66,7 @@ export class LinearClient {
   constructor(private readonly token: string, private readonly fetchImpl: typeof fetch = fetch) {}
 
   async viewer(signal: AbortSignal) {
-    return parse(Viewer, await this.query('query AntumiViewer { viewer { id name email } }', {}, signal)).viewer
+    return parse(Viewer, await this.query('query CodotViewer { viewer { id name email } }', {}, signal)).viewer
   }
 
   async list(settings: SourceSettings, signal: AbortSignal): Promise<SourceIssue[]> {
@@ -114,7 +114,7 @@ export class LinearClient {
 
   async commentChanges(key: string, signal: AbortSignal, options: SourceCommentOptions): Promise<SourceCommentPage> {
     const schema = z.object({ issue: z.object({ identifier: z.string(), url: z.string(), comments: z.object({ nodes: z.array(CommentRow), pageInfo: z.object({ hasNextPage: z.boolean(), endCursor: z.string().nullable() }) }) }).nullable() })
-    const query = `query AntumiComments($id: String!, $after: String) { issue(id: $id) { identifier url comments(first: 100, after: $after, orderBy: createdAt) { nodes { id body createdAt updatedAt url user { name } } pageInfo { hasNextPage endCursor } } } }`
+    const query = `query CodotComments($id: String!, $after: String) { issue(id: $id) { identifier url comments(first: 100, after: $after, orderBy: createdAt) { nodes { id body createdAt updatedAt url user { name } } pageInfo { hasNextPage endCursor } } } }`
     const comments: SourceComment[] = []
     let after: string | null = null
     const seen = new Set<string>()

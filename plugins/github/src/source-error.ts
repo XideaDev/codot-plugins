@@ -1,1 +1,1 @@
-export { SourceError } from '@antumi/plugin-sdk'
+export { SourceError } from '@codot/plugin-sdk'

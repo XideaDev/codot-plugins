@@ -1,7 +1,7 @@
 import { GitHubClient, GITHUB_KEY_PATTERN, type GitHubApi, type GitHubCredentials } from './github-client.js'
 import { githubIssueSnapshot } from './github-snapshot.js'
 import { SourceError } from './source-error.js'
-import type { SourceCredential, SourcePlugin } from '@antumi/plugin-sdk'
+import type { SourceCredential, SourcePlugin } from '@codot/plugin-sdk'
 
 export const DEFAULT_GITHUB_QUERY = 'assignee:@me is:open'
 
@@ -32,7 +32,7 @@ export function githubProvider(connect: (credentials: GitHubCredentials) => GitH
     normalizeSettings: (values) => ({ query: values.query?.trim().split(/\s+/).join(' ') || DEFAULT_GITHUB_QUERY }),
     normalizeKey: (key) => key.trim(),
     envCredential: (env) => {
-      const token = env.ANTUMI_GITHUB_TOKEN
+      const token = env.CODOT_GITHUB_TOKEN
       return token ? { kind: 'token', payload: { token } } : null
     },
 

@@ -1,4 +1,4 @@
-import { SourceError, type SourceCredential, type SourcePlugin } from '@antumi/plugin-sdk'
+import { SourceError, type SourceCredential, type SourcePlugin } from '@codot/plugin-sdk'
 import { LinearClient } from './linear-client.js'
 
 const KEY = /^[A-Z][A-Z0-9_]*-[1-9][0-9]*$/
@@ -27,7 +27,7 @@ export function linearSource(connect = (key: string) => new LinearClient(key)): 
       if (!KEY.test(key) || key.length > 160) throw new SourceError('not-found', '请输入 Linear 事项编号，例如 ENG-123')
       return key
     },
-    envCredential: (env) => env.ANTUMI_LINEAR_TOKEN ? { kind: 'token', payload: { token: env.ANTUMI_LINEAR_TOKEN } } : null,
+    envCredential: (env) => env.CODOT_LINEAR_TOKEN ? { kind: 'token', payload: { token: env.CODOT_LINEAR_TOKEN } } : null,
     async login(session, _settings, signal) {
       let error: string | undefined
       for (let attempt = 0; attempt < 3; attempt++) {

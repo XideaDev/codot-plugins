@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { LoginPrompt, SourceIssue } from '@antumi/plugin-sdk'
+import type { LoginPrompt, SourceIssue } from '@codot/plugin-sdk'
 import type { GitHubApi, GitHubCredentials, GitHubIssue } from './github-client.js'
 import { DEFAULT_GITHUB_QUERY, githubProvider } from './github-provider.js'
 import { SourceError } from './source-error.js'
@@ -59,7 +59,7 @@ describe('githubProvider', () => {
     expect(provider.normalizeSettings({ query: '  org:acme\n  label:bug  ', ignored: 'value' })).toEqual({ query: 'org:acme label:bug' })
     expect(provider.normalizeSettings({ query: ' \n ' })).toEqual({ query: DEFAULT_GITHUB_QUERY })
     expect(provider.normalizeSettings({})).toEqual({ query: DEFAULT_GITHUB_QUERY })
-    expect(provider.envCredential?.({ ANTUMI_GITHUB_TOKEN: 'token' })).toEqual({ kind: 'token', payload: { token: 'token' } })
+    expect(provider.envCredential?.({ CODOT_GITHUB_TOKEN: 'token' })).toEqual({ kind: 'token', payload: { token: 'token' } })
     expect(provider.envCredential?.({})).toBeNull()
   })
 

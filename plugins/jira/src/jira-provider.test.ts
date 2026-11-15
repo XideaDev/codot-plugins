@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import type { LoginPrompt } from '@antumi/plugin-sdk'
+import type { LoginPrompt } from '@codot/plugin-sdk'
 import type { JiraApi, JiraCredentials } from './jira-client.js'
 import { DEFAULT_JIRA_JQL, jiraProvider } from './jira-provider.js'
-import { SourceError } from '@antumi/plugin-sdk'
+import { SourceError } from '@codot/plugin-sdk'
 
 function fakeApi(validToken: string, seen: JiraCredentials[]): (credentials: JiraCredentials) => JiraApi {
   return (credentials) => ({
@@ -55,11 +55,11 @@ describe('jiraProvider', () => {
     expect(provider.normalizeSettings({ site: 'acme.atlassian.net/', jql: '  ' })).toEqual({ site: 'https://acme.atlassian.net', jql: DEFAULT_JIRA_JQL })
     expect(() => provider.normalizeSettings({ site: 'http://acme.atlassian.net' })).toThrow(SourceError)
     expect(provider.normalizeKey?.(' proj-7 ')).toBe('PROJ-7')
-    expect(provider.envCredential?.({ ANTUMI_JIRA_EMAIL: 'ci@acme.com', ANTUMI_JIRA_TOKEN: 't' })).toEqual({
+    expect(provider.envCredential?.({ CODOT_JIRA_EMAIL: 'ci@acme.com', CODOT_JIRA_TOKEN: 't' })).toEqual({
       kind: 'basic',
       payload: { email: 'ci@acme.com', token: 't' }
     })
-    expect(provider.envCredential?.({ ANTUMI_JIRA_TOKEN: 't' })).toBeNull()
+    expect(provider.envCredential?.({ CODOT_JIRA_TOKEN: 't' })).toBeNull()
   })
 })
 

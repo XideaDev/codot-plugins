@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { JiraClient, normalizeSite } from './jira-client.js'
-import { SourceError } from '@antumi/plugin-sdk'
+import { SourceError } from '@codot/plugin-sdk'
 
 type Route = (url: URL) => Response | undefined
 

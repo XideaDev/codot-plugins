@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { PluginManifest } from '@antumi/plugin-sdk'
+import { PluginManifest } from '@codot/plugin-sdk'
 
 export const root = fileURLToPath(new URL('../', import.meta.url))
 

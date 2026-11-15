@@ -1,4 +1,4 @@
-import { runSourcePlugin } from '@antumi/plugin-sdk'
+import { runSourcePlugin } from '@codot/plugin-sdk'
 import manifest from '../manifest.json' with { type: 'json' }
 import { zentaoSource } from './zentao-source.js'
 

@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { commentState, commentPage, SourceComment, type SourceCommentOptions, type SourceCommentPage } from '@antumi/plugin-sdk'
+import { commentState, commentPage, SourceComment, type SourceCommentOptions, type SourceCommentPage } from '@codot/plugin-sdk'
 import TurndownService from 'turndown'
-import { MAX_ISSUE_TITLE_LENGTH, MAX_SNAPSHOT_LENGTH, SourceError, type SourceIssue, type SourceIssueDetail, type SourceSettings } from '@antumi/plugin-sdk'
+import { MAX_ISSUE_TITLE_LENGTH, MAX_SNAPSHOT_LENGTH, SourceError, type SourceIssue, type SourceIssueDetail, type SourceSettings } from '@codot/plugin-sdk'
 
 export type ItemKind = 'task' | 'bug' | 'story'
 const Account = z.union([z.string(), z.object({ account: z.string().optional(), realname: z.string().optional() })]).nullish()

@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { commentState, commentPage, SourceComment, type SourceCommentState, type SourceCommentOptions, type SourceCommentPage } from '@antumi/plugin-sdk'
-import { MAX_ISSUE_TITLE_LENGTH, type SourceIssue } from '@antumi/plugin-sdk'
+import { commentState, commentPage, SourceComment, type SourceCommentState, type SourceCommentOptions, type SourceCommentPage } from '@codot/plugin-sdk'
+import { MAX_ISSUE_TITLE_LENGTH, type SourceIssue } from '@codot/plugin-sdk'
 import { SourceError } from './source-error.js'
 
 export const GITHUB_KEY_PATTERN = /^([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)#([1-9][0-9]*)$/
@@ -261,7 +261,7 @@ export class GitHubClient implements GitHubApi {
         headers: {
           Accept: 'application/vnd.github+json',
           Authorization: `Bearer ${this.credentials.token}`,
-          'User-Agent': 'Antumi',
+          'User-Agent': 'Codot',
           'X-GitHub-Api-Version': '2022-11-28'
         },
         signal: AbortSignal.any([signal, AbortSignal.timeout(TIMEOUT_MS)]),

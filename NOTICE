@@ -1,0 +1,10 @@
+Codot Plugins
+Copyright 2026 XideaDev
+
+This product is derived from Antumi Plugins (https://github.com/flyhero/antumi-plugins),
+licensed under the Apache License, Version 2.0.
+
+Modifications by XideaDev:
+- Renamed packages, plugin IDs, environment variables and user-facing names from Antumi to Codot.
+- Switched the plugin SDK to @codot/plugin-sdk, built from the Codot repository.
+- Updated documentation, release scripts and host version requirements for Codot.

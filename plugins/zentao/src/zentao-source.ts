@@ -1,4 +1,4 @@
-import { SourceError, type SourceCredential, type SourcePlugin } from '@antumi/plugin-sdk'
+import { SourceError, type SourceCredential, type SourcePlugin } from '@codot/plugin-sdk'
 import { ZentaoClient, type ItemKind } from './zentao-client.js'
 
 function kind(value: string | undefined): ItemKind {
@@ -38,7 +38,7 @@ export function zentaoSource(connect = (base: string, key: string) => new Zentao
       if (!/^(task|bug|story)-[1-9][0-9]*$/.test(key) || key.length > 160) throw new SourceError('not-found', '请输入 task-123、bug-123 或 story-123')
       return key
     },
-    envCredential: (env) => env.ANTUMI_ZENTAO_TOKEN ? { kind: 'token', payload: { token: env.ANTUMI_ZENTAO_TOKEN } } : null,
+    envCredential: (env) => env.CODOT_ZENTAO_TOKEN ? { kind: 'token', payload: { token: env.CODOT_ZENTAO_TOKEN } } : null,
     async login(session, settings, signal) {
       const base = normalizeApiBase(settings.apiBase ?? '')
       let error: string | undefined

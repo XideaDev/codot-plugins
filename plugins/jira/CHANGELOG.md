@@ -1,5 +1,9 @@
 # 更新记录
 
+## 1.3.1
+
+- 改为 Codot 插件：插件 ID 改为 codot.jira（Codot 会把内置 Jira 来源的配置迁移过来），使用 Codot Plugin SDK 0.1.4，凭据环境变量改为 CODOT_ 前缀；需要 Codot 0.21.5 或更高版本。
+
 ## 1.3.0
 
 - 把新评论交给 Agent 时，评论里贴的图片会一起带过去（需要支持评论图片的 Antumi）。

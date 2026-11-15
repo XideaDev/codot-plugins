@@ -1,7 +1,7 @@
 {
-  "id": "antumi.linear",
-  "version": "0.2.0",
-  "engines": { "antumi": ">=0.15.11 <1.0.0" },
+  "id": "codot.linear",
+  "version": "0.2.1",
+  "engines": { "codot": ">=0.21.5-beta.1 <1.0.0" },
   "contributes": {
     "sources": [{
       "id": "linear", "commentSync": 1, "name": "Linear",
@@ -14,5 +14,5 @@
     }]
   },
   "entry": { "runtime": "node", "main": "main.mjs" },
-  "env": ["ANTUMI_LINEAR_TOKEN"]
+  "env": ["CODOT_LINEAR_TOKEN"]
 }

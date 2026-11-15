@@ -1,8 +1,8 @@
 {
-  "id": "antumi.github",
-  "version": "1.1.0",
+  "id": "codot.github",
+  "version": "1.1.1",
   "engines": {
-    "antumi": ">=0.15.11 <1.0.0"
+    "codot": ">=0.21.5-beta.1 <1.0.0"
   },
   "contributes": {
     "sources": [
@@ -34,6 +34,6 @@
     "main": "main.mjs"
   },
   "env": [
-    "ANTUMI_GITHUB_TOKEN"
+    "CODOT_GITHUB_TOKEN"
   ]
 }

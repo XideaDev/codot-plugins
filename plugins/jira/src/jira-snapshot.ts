@@ -1,4 +1,4 @@
-import { MAX_SNAPSHOT_LENGTH } from '@antumi/plugin-sdk'
+import { MAX_SNAPSHOT_LENGTH } from '@codot/plugin-sdk'
 import { adfToMarkdown, escapeLinkText, type MediaDescriber } from './jira-adf.js'
 import type { JiraAttachment, JiraIssue } from './jira-client.js'
 
@@ -20,7 +20,7 @@ function formatSize(bytes: number): string {
 }
 
 // What happened to each image attachment: shown under the snapshot, too big or too many to
-// fetch, failed on the way, or left for Antumi to fetch apart from the text.
+// fetch, failed on the way, or left for Codot to fetch apart from the text.
 export type ImageOutcome = 'saved' | 'skipped' | 'failed' | 'deferred'
 
 const IMAGE_NOTE: Record<ImageOutcome, string> = {

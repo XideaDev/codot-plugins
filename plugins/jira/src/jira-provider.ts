@@ -1,8 +1,8 @@
-import { MAX_ATTACHMENT_BYTES, MAX_TASK_IMAGES } from '@antumi/plugin-sdk'
+import { MAX_ATTACHMENT_BYTES, MAX_TASK_IMAGES } from '@codot/plugin-sdk'
 import { JiraClient, normalizeSite, type JiraApi, type JiraAttachment, type JiraCredentials, type JiraIssue } from './jira-client.js'
 import { issueSnapshot, isImageAttachment, type ImageOutcome } from './jira-snapshot.js'
-import { SourceError } from '@antumi/plugin-sdk'
-import type { SourceCredential, SourcePlugin, SourceSettings } from '@antumi/plugin-sdk'
+import { SourceError } from '@codot/plugin-sdk'
+import type { SourceCredential, SourcePlugin, SourceSettings } from '@codot/plugin-sdk'
 
 export const DEFAULT_JIRA_JQL = 'assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC'
 
@@ -48,7 +48,7 @@ async function downloadImages(api: JiraApi, issue: JiraIssue, signal: AbortSigna
       outcomes.set(file.id, 'saved')
     } catch (error) {
       // A token without read:attachment:jira gets 403 here; the issue still imports.
-      console.error(`[antumi-jira] image ${file.filename} of ${issue.key} not fetched:`, error instanceof Error ? error.message : error)
+      console.error(`[codot-jira] image ${file.filename} of ${issue.key} not fetched:`, error instanceof Error ? error.message : error)
     }
   })
   const images = wanted.flatMap((file) => {
@@ -88,8 +88,8 @@ export function jiraProvider(connect: (credentials: JiraCredentials) => JiraApi 
     normalizeSettings: (values) => ({ site: normalizeSite(values.site ?? ''), jql: values.jql?.trim() || DEFAULT_JIRA_JQL }),
     normalizeKey: (key) => key.trim().toUpperCase(),
     envCredential: (env) => {
-      const email = env.ANTUMI_JIRA_EMAIL
-      const token = env.ANTUMI_JIRA_TOKEN
+      const email = env.CODOT_JIRA_EMAIL
+      const token = env.CODOT_JIRA_TOKEN
       return email && token ? { kind: 'basic', payload: { email, token } } : null
     },
 
@@ -133,7 +133,7 @@ export function jiraProvider(connect: (credentials: JiraCredentials) => JiraApi 
       if (!api.commentChanges) throw new SourceError('request-failed', 'Comment sync is unavailable')
       return api.commentChanges(key, signal, options)
     },
-    // An image a comment listed, by its attachment id; Antumi checks that the bytes are an image.
+    // An image a comment listed, by its attachment id; Codot checks that the bytes are an image.
     async image(settings, credential, _key, id, signal) {
       const bytes = await client(jiraCredentials(settings, credential)).download(id, MAX_ATTACHMENT_BYTES, AbortSignal.any([signal, AbortSignal.timeout(IMAGE_TIMEOUT_MS)]))
       return { name: '', bytes }

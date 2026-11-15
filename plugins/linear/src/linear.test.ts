@@ -32,7 +32,7 @@ describe('Linear source', () => {
     expect(result).toEqual({ credential: { kind: 'token', payload: { token: 'good' } }, account: 'ann@example.com' })
     expect(prompt).toHaveBeenCalledTimes(2)
     expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ headers: { Authorization: 'good' }, redirect: 'error' })
-    expect(source.envCredential?.({ ANTUMI_LINEAR_TOKEN: 'env-key' })).toEqual({ kind: 'token', payload: { token: 'env-key' } })
+    expect(source.envCredential?.({ CODOT_LINEAR_TOKEN: 'env-key' })).toEqual({ kind: 'token', payload: { token: 'env-key' } })
   })
 
   it('pages assigned issues using GraphQL variables and maps states and priority', async () => {

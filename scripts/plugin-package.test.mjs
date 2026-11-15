@@ -6,7 +6,7 @@ test('resolves independent plugin versions and matching release tags', async () 
   for (const slug of ['github', 'jira', 'linear', 'zentao']) {
     const plugin = await pluginPackage(slug)
     const release = await releasePackage(`${slug}-v${plugin.pkg.version}`)
-    assert.equal(release.manifest.id, `antumi.${slug}`)
+    assert.equal(release.manifest.id, `codot.${slug}`)
     assert.equal(release.archive, `${plugin.pkg.name}-${plugin.pkg.version}.zip`)
     assert.equal(release.prerelease, false)
   }
