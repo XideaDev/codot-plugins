@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { readFile, mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { build } from 'esbuild'
@@ -14,4 +15,6 @@ await writeFile(path.join(artifact, 'manifest.json'), metadata)
 // Rebuilding identical inputs must preserve the archive checksum.
 const bytes = zipSync({ 'manifest.json': strToU8(metadata), 'main.mjs': new Uint8Array(await readFile(path.join(artifact, 'main.mjs'))) }, { mtime: new Date(1980, 0, 1) })
 await writeFile(path.join(dist, archive), bytes)
+// Codot checks the download against this before it unpacks an official plugin.
+await writeFile(path.join(dist, `${archive}.sha256`), `${createHash('sha256').update(bytes).digest('hex')}  ${archive}\n`)
 console.log(`Built ${path.relative(process.cwd(), path.join(dist, archive))}`)

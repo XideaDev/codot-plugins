@@ -29,7 +29,7 @@ npm run check --workspace codot-plugin-github
 npm run build --workspace codot-plugin-github
 ```
 
-`npm run check` 执行所有插件的类型检查、模拟 API 测试、发布脚本测试和构建。每个插件生成 `plugins/<slug>/dist/plugin/` 和 `plugins/<slug>/dist/codot-plugin-<slug>-<version>.zip`。ZIP 包含 SDK 和所有运行依赖，用户安装时无需安装 Node 或 npm。构建使用固定 ZIP 时间戳，相同输入得到相同校验和。
+`npm run check` 执行所有插件的类型检查、模拟 API 测试、发布脚本测试和构建。每个插件生成 `plugins/<slug>/dist/plugin/` 和 `plugins/<slug>/dist/codot-plugin-<slug>-<version>.zip`。ZIP 包含 SDK 和所有运行依赖，用户安装时无需安装 Node 或 npm。构建使用固定 ZIP 时间戳，相同输入得到相同校验和；每个 ZIP 旁边生成 `<zip>.sha256`，随 Release 一起上传，Codot 安装官方插件时据此校验下载内容。
 
 SDK 包在 `vendor/`，由 Codot 主仓库的 `packages/plugin-sdk`（`@codot/plugin-sdk`）打包而来：
 
